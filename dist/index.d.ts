@@ -1,0 +1,11 @@
+import * as Effects from "./effects";
+export type Dispatch<A> = (value: A) => void;
+export type Effect<Action> = Array<(dispatch: Dispatch<Action>) => void>;
+export type StateEffectPair<State, Action> = [State, Effect<Action>];
+export type Reducer<State, Action> = (prevState: State, action: Action) => StateEffectPair<State, Action>;
+export type ReducerState<R extends Reducer<any, any>> = R extends Reducer<infer S, any> ? S : never;
+export type ReducerAction<R extends Reducer<any, any>> = R extends Reducer<any, infer A> ? A : never;
+export type ReducerStateEffectPair<R extends Reducer<any, any>> = R extends Reducer<infer S, infer A> ? [S, Effect<A>] : never;
+export declare function useElmish<R extends Reducer<any, any>>(reducer: R, initializer: () => ReducerStateEffectPair<R>): [ReducerState<R>, Dispatch<ReducerAction<R>>];
+export { Effects };
+export default useElmish;
