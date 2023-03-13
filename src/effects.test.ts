@@ -15,6 +15,7 @@ describe("delay()", () => {
 
   test("should call setTimeout with the specified time", () => {
     jest.useFakeTimers();
+    jest.spyOn(global, 'setTimeout');
     const delay = 100;
     const action = "FROG";
     const delayEffect = Effects.delay(action, delay)[0];

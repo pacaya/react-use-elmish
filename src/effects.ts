@@ -107,7 +107,7 @@ function effectFromFunction<Action, Value, Err>(
           dispatch(handleSuccess(value))
         }
       } catch (error) {
-        dispatch(handleError(error))
+        dispatch(handleError(error as Err))
       }
     }
   ];
